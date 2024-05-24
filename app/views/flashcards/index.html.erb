@@ -1,0 +1,18 @@
+<h1>Flashcards</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Question</th>
+            <th>Answer</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @flashcards.each do |flashcard| %>
+            <tr>
+                <td><%= flashcard.question %></td>
+                <td><%= flashcard.answer %></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
