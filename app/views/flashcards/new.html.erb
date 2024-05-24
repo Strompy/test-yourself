@@ -1,0 +1,15 @@
+<h1>Create a new flashcard</h1>
+<%= form_with(model: @flashcard, url: flashcards_path, local: true) do |form| %>
+    <div class="field">
+        <%= form.label :question %>
+        <%= form.text_field :question %>
+    </div>
+
+    <div class="field">
+        <%= form.label :answer %>
+        <%= form.text_field :answer %>
+    </div>
+    <div class="actions">
+        <%= form.submit "Create Flashcard" %>
+    </div>
+<% end %>
