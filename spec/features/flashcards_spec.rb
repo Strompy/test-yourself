@@ -1,13 +1,13 @@
 # create an rspec spec for flashcards
-# first test creating flash cards
-# then test viewing flash cards idex
-# flash cards have a question and an answer
+# first test creating flashcards
+# then test viewing flashcards idex
+# flashcards have a question and an answer
 require 'rails_helper'
 
 RSpec.describe 'Flashcards', type: :feature do
     describe 'create' do
-        it 'creates a new flash card' do
-            # navigate to the new flash card page
+        it 'creates a new flashcard' do
+            # navigate to the new flashcard page
             visit new_flashcard_path
             # fill in the form with the question and answer
             fill_in 'Question', with: 'What is the capital of France?'
@@ -16,14 +16,15 @@ RSpec.describe 'Flashcards', type: :feature do
             click_on 'Create Flashcard'
             
             expect(current_path).to eq(flashcards_path)
-            expect(page).to have_content('Flash card created successfully')
+            expect(page).to have_content('Flashcard created successfully')
             expect(page).to have_content('What is the capital of France?')
+
 
         end
     end
 
     describe 'index' do
-        it 'displays all flash cards' do
+        it 'displays all flashcards' do
             # create a flash card
             Flashcard.create!(question: 'What is the capital of France?', answer: 'Paris')
             Flashcard.create!(question: 'What is the capital of Germany?', answer: 'Berlin')
@@ -69,22 +70,22 @@ RSpec.describe 'Flashcards', type: :feature do
             click_on 'Update Flashcard'
             # expect the flash card to be updated
             expect(current_path).to eq(flashcard_path(flashcard))
-            expect(page).to have_content('Flash card updated successfully')
+            expect(page).to have_content('Flashcard updated successfully')
             expect(page).to have_content('What is the capital of Germany?')
         end
     end
 
     describe 'destroy' do
-        it 'deletes a flash card' do
-            # create a flash card
+        it 'deletes a flashcard' do
+            # create a flashcard
             flashcard = Flashcard.create!(question: 'What is the capital of France?', answer: 'Paris')
-            # visit the flash card show page
+            # visit the flashcard show page
             visit flashcard_path(flashcard)
             # click the delete button
             click_on 'Delete Flashcard'
-            # expect the flash card to be deleted
+            # expect the flashcard to be deleted
             expect(current_path).to eq(flashcards_path)
-            expect(page).to have_content('Flash card deleted successfully')
+            expect(page).to have_content('Flashcard deleted successfully')
             expect(page).not_to have_content('What is the capital of France?')
         end
     end
