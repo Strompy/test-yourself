@@ -21,6 +21,19 @@ class FlashcardsController < ApplicationController
         end
     end
 
+    def edit
+        @flashcard = Flashcard.find(params[:id])
+    end
+
+    def update
+        @flashcard = Flashcard.find(params[:id])
+        if @flashcard.update(flashcard_params) 
+            redirect_to flashcard_path(@flashcard), notice: 'Flashcard updated successfully'
+        else
+            render :edit, notice: "Flashcard not updated: #{flashcard.errors.full_messages.to_sentence}"
+        end
+    end
+
     private
 
     def flashcard_params
