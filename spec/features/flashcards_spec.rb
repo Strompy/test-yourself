@@ -1,7 +1,3 @@
-# create an rspec spec for flashcards
-# first test creating flashcards
-# then test viewing flashcards idex
-# flashcards have a question and an answer
 require 'rails_helper'
 
 RSpec.describe 'Flashcards', type: :feature do
