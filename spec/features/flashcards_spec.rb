@@ -7,7 +7,9 @@ require 'rails_helper'
 RSpec.describe 'Flashcards', type: :feature do
     describe 'create' do
         it 'creates a new flashcard' do
-            visit new_flashcard_path
+            visit flashcards_path
+            click_on 'New flashcard'
+
             fill_in 'Question', with: 'What is the capital of France?'
             fill_in 'Answer', with: 'Paris'
             click_on 'Submit'
