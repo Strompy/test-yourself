@@ -48,7 +48,7 @@ RSpec.describe 'Flashcards', type: :feature do
             expect(page).to have_content('What is the capital of France?')
             expect(page).to have_content('Paris')
             # expect a link to the flash card index page
-            expect(page).to have_link('Back to Flashcards', href: flashcards_path)
+            expect(page).to have_link('Back to flashcards', href: flashcards_path)
             # this is where we will add testing functionailty
             # answer won't be displayed automatically
             # there will be a button to show the answer
