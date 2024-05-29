@@ -3,4 +3,4 @@
     <p><%= @flashcard.answer %></p>
 </div>
 
-<a href="<%= flashcards_path %>">Back to flashcards</a>
+<%= link_to sanitize("&larr; Back to flashcards"), flashcards_path %>

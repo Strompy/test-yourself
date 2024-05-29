@@ -13,7 +13,7 @@ RSpec.describe 'Flashcards', type: :feature do
             fill_in 'Question', with: 'What is the capital of France?'
             fill_in 'Answer', with: 'Paris'
             # click the submit button
-            click_on 'Create Flashcard'
+            click_on 'Submit'
             
             expect(current_path).to eq(flashcards_path)
             expect(page).to have_content('Flashcard created successfully')
@@ -67,7 +67,7 @@ RSpec.describe 'Flashcards', type: :feature do
             fill_in 'Question', with: 'What is the capital of Germany?'
             fill_in 'Answer', with: 'Berlin'
             # click the submit button
-            click_on 'Update Flashcard'
+            click_on 'Submit'
             # expect the flash card to be updated
             expect(current_path).to eq(flashcard_path(flashcard))
             expect(page).to have_content('Flashcard updated successfully')
