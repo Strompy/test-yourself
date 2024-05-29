@@ -82,7 +82,7 @@ RSpec.describe 'Flashcards', type: :feature do
             # visit the flashcard show page
             visit flashcard_path(flashcard)
             # click the delete button
-            click_on 'Delete Flashcard'
+            click_on 'Delete'
             # expect the flashcard to be deleted
             expect(current_path).to eq(flashcards_path)
             expect(page).to have_content('Flashcard deleted successfully')

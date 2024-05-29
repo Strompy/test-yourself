@@ -33,6 +33,11 @@ class FlashcardsController < ApplicationController
             render :edit, notice: "Flashcard not updated: #{flashcard.errors.full_messages.to_sentence}"
         end
     end
+    
+    def destroy
+        Flashcard.destroy(params[:id])
+        redirect_to flashcards_path, notice: 'Flashcard deleted successfully'
+    end
 
     private
 
