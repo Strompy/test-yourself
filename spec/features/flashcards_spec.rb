@@ -37,12 +37,18 @@ RSpec.describe 'Flashcards', type: :feature do
             visit flashcard_path(flashcard)
 
             expect(page).to have_content('What is the capital of France?')
-            expect(page).to have_content('Paris')
             expect(page).to have_link('Back to flashcards', href: flashcards_path)
-            
-            # answer won't be displayed automatically
-            # there will be a button to show the answer
-            # when the button is clicked, the answer will be displayed
+        end
+        it 'displays the answer when the button is clicked' do
+            flashcard = Flashcard.create!(question: 'What is the capital of France?', answer: 'Paris')
+            visit flashcard_path(flashcard)
+
+            expect(page).to have_content('What is the capital of France?')
+            expect(page).to_not have_content('Paris')
+            click_on 'Reveal'
+
+            # this might be a perfect task for stimulus
+            expect(page).to have_content('Paris')            
             # there will be a button to say whether the user got the answer right or wrong
         end
     end
