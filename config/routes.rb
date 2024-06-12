@@ -5,4 +5,5 @@ Rails.application.routes.draw do
 
   root "flashcards#index"
   resources :flashcards
+  resource :search, only: :show
 end

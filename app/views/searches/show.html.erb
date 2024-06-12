@@ -1,0 +1,13 @@
+<%= turbo_frame_tag :search do %>
+    <% if @flashcards.any? %>
+    <ul>
+        <% @flashcards.each do |card| %>
+        <li>
+            <%= link_to card.question, card, data: { turbo_frame: "_top" } %>
+        </li>
+        <% end %>
+    </ul>
+    <% else %>
+        <p>No results</p>
+    <% end %>
+<% end %>
