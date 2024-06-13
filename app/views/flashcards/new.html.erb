@@ -1,4 +1,8 @@
-<%= link_to sanitize("&larr; Back to flashcards"), flashcards_path %>
-<h1>Create a new flashcard</h1>
+<main class='container'>
+    <div class='header'>
+        <h1>Create a new flashcard</h1>
+        <%= link_to sanitize("&larr; Back to flashcards"), flashcards_path %>
+    </div>
 
-<%= render "form", flashcard: @flashcard %>
+    <%= render "form", flashcard: @flashcard %>
+</main>

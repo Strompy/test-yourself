@@ -1,4 +1,4 @@
-<%= form_with(model: @flashcard, local: true) do |form| %>
+<%= form_with(model: @flashcard, local: true, class: "form") do |form| %>
     <div class="field">
         <%= form.label :question %>
         <%= form.text_field :question %>
@@ -9,6 +9,6 @@
         <%= form.text_field :answer %>
     </div>
     <div class="actions">
-        <%= form.submit "Submit" %>
+        <%= form.submit "Submit", class: "btn btn--secondary" %>
     </div>
 <% end %>
