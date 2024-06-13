@@ -1,19 +1,11 @@
-<h1>Flashcards</h1>
-<%= link_to "New flashcard", new_flashcard_path %>
+<main class='container'>
 
-<table>
-    <thead>
-        <tr>
-            <th>Question</th>
-            <th>Answer</th>
-        </tr>
-    </thead>
-    <tbody>
-        <% @flashcards.each do |flashcard| %>
-            <tr>
-                <td><%= flashcard.question %></td>
-                <td><%= flashcard.answer %></td>
-            </tr>
-        <% end %>
-    </tbody>
-</table>
+    <div class='header'>
+        
+        <h1>Flashcards</h1>
+        <%= link_to "New flashcard", new_flashcard_path, class: "btn btn--primary" %>
+    </div>
+
+    <%= render @flashcards %>
+    
+</main>

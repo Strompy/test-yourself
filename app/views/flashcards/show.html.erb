@@ -1,9 +1,11 @@
-<%= link_to sanitize("&larr; Back to flashcards"), flashcards_path %>
+<main class='container'>
+    <div class='header'>
+        <h1></h1>
+        <%= link_to sanitize("&larr; Back to flashcards"), flashcards_path %>
+    </div>
+    
+    <%= render @flashcard %>
 
-<div class="flashcard">
-    <h2><%= @flashcard.question %></h2>
-    <p><%= @flashcard.answer %></p>
-</div>
+</main>
 
-<%= button_to "Delete", flashcard_path(@flashcard), method: :delete %>
 

@@ -1,0 +1,7 @@
+<div class="flashcard">
+    <%= link_to flashcard.question, flashcard_path(flashcard) %>
+    <div class="flashcard__actions">
+        <%= button_to "Delete", flashcard_path(flashcard), method: :delete, class: "btn btn--light" %>
+        <%= link_to "Edit", edit_flashcard_path(flashcard), class: "btn btn--light" %>
+    </div>
+</div>
