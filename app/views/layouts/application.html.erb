@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+i<!DOCTYPE html>
 <html>
   <head>
     <title>TestYourself</title>
@@ -11,6 +11,19 @@
   </head>
 
   <body>
+    <header class='container'>
+      <div class='header'>
+
+        <h1>Flashcards</h1>
+        <%= link_to 'Quiz me!', random_flashcards_path, class: "btn btn--primary"  %>
+        <% if @flashcard %>
+          <%= link_to sanitize("&larr; Back to flashcards"), flashcards_path %>
+        <% else %>
+          <%= link_to "New flashcard", new_flashcard_path, class: "btn btn--primary" %>
+        <% end %>
+      </div>
+    </header>
+
     <div class="flash-container">
       <% flash.each do |key, value| %>
         <div class="flash <%= key %>">
@@ -18,20 +31,23 @@
         </div>
       <% end %>
     </div>
-    
-    <%= yield %>
 
-    <dialog class='ksearch' data-controller="dialog" data-action="keydown.meta+k@window->dialog#open">
-      <%# <form method="dialog", class='ksearch__actions'>
-        <button class="btn btn--dark">Close</button>
-      </form> %>
-      
-      <%= form_with url: search_path, method: :get, data: { controller: "autosubmit", autosubmit_delay_value: 300, turbo_frame: :search } do |f| %>
-        <%= f.search_field :query, autofocus: true, data: { action: "autosubmit#submit" } %>
-      <% end %>
+    <main class='container'>
 
-      <%= turbo_frame_tag :search, loading: :lazy, src: search_path %>
-    </dialog>
+      <%= yield %>
+
+      <dialog class='ksearch' data-controller="dialog" data-action="keydown.meta+k@window->dialog#open">
+        <%# <form method="dialog", class='ksearch__actions'>
+          <button class="btn btn--dark">Close</button>
+        </form> %>
+        
+        <%= form_with url: search_path, method: :get, data: { controller: "autosubmit", autosubmit_delay_value: 300, turbo_frame: :search } do |f| %>
+          <%= f.search_field :query, autofocus: true, data: { action: "autosubmit#submit" } %>
+        <% end %>
+
+        <%= turbo_frame_tag :search, loading: :lazy, src: search_path %>
+      </dialog>
+    </main>
 
   </body>
 </html>
