@@ -6,6 +6,12 @@ class FlashcardsController < ApplicationController
     end
 
     def show; end
+
+    def random
+        id = rand(Flashcard.minimum(:id)..Flashcard.maximum(:id))
+        @flashcard = Flashcard.where('id >= ?', id).limit(1).first
+        redirect_to flashcard_path(@flashcard)
+    end
     
     def new
         @flashcard = Flashcard.new

@@ -53,6 +53,32 @@ RSpec.describe 'Flashcards', type: :feature do
         end
     end
 
+    describe 'random' do
+        it 'grabs a random flash card and redirects to show' do
+            Flashcard.create!(question: 'What is the capital of France?', answer: 'Paris')
+            Flashcard.create!(question: 'What is the capital of Germany?', answer: 'Berlin')
+            Flashcard.create!(question: 'What is the capital of Italy?', answer: 'Rome')
+            visit flashcards_path
+            click_on 'Quiz me!'
+            expect(page).to have_content('What is the capital of')
+            click_on 'Quiz me!'
+            expect(page).to have_content('What is the capital of')
+        end
+        it 'handles no flashcards' do
+            visit flashcards_path
+            click_on 'Quiz me!'
+            expect(page).to have_content('No flashcards to quiz')
+        end
+        it 'handles deleted id' do
+            flashcard = Flashcard.create!(question: 'What is the capital of France?', answer: 'Paris')
+            flashcard.destroy
+            visit random_flashcards_path
+            expect(page).to have_content('No flashcards to quiz')
+            # maybe create a new card and check it always gets that card?
+        end
+    end
+
+
     describe 'update' do
         it 'updates a flash card' do
             flashcard = Flashcard.create!(question: 'What is the capital of France?', answer: 'Paris')

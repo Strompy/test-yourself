@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   root "flashcards#index"
-  resources :flashcards
+  resources :flashcards do
+    get :random, on: :collection
+  end
   resource :search, only: :show
 end
