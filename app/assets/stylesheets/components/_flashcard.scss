@@ -20,4 +20,20 @@
       align-self: flex-start;
       gap: var(--space-xs);
     }
+
+    &__answer {
+      display: flex;
+      justify-content: center;
+      padding: var(--space-xs);
+      border-radius: var(--border-radius);
+      background-color: var(--color-light);
+      box-shadow: var(--shadow-small);
+      margin-top: var(--space-xs);
+      margin-bottom: var(--space-xs);
+    }
+
+    &__btn {
+      display: flex;
+      justify-content: center;
+    }
 }

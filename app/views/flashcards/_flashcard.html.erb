@@ -7,8 +7,12 @@
 </div>
 
 <% if current_page?(flashcard_path(flashcard)) %>
-    <div class="flashcard__answer" data-controller="toggle">
-        <span data-action="click->toggle#toggle" class="btn btn--secondary" id='reveal-btn'>Reveal</span>
-        <p data-toggle-target="answer" hidden='true' id='answer'><%= flashcard.answer %></p>
+    <div class='container' data-controller="toggle">
+        <div class='flashcard__btn'>
+            <span data-action="click->toggle#toggle" class="btn btn--secondary" id='reveal-btn'>Reveal</span>
+        </div>
+        <div data-toggle-target="answer" id='answer' hidden>
+            <p class="flashcard__answer"><%= flashcard.answer %></p>
+        </div>
     </div>
 <% end %>
