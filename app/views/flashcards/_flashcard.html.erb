@@ -1,11 +1,14 @@
 <div class="flashcard">
     <%= link_to flashcard.question, flashcard_path(flashcard) %>
-    <div class="flashcard__answer" data-controller="toggle">
-        <span data-action="click->toggle#toggle" class="btn btn--light">Reveal</span>
-        <p data-toggle-target="answer" hidden='true'><%= flashcard.answer %></p>
-    </div>
     <div class="flashcard__actions">
         <%= button_to "Delete", flashcard_path(flashcard), method: :delete, class: "btn btn--light" %>
         <%= link_to "Edit", edit_flashcard_path(flashcard), class: "btn btn--light" %>
     </div>
 </div>
+
+<% if current_page?(flashcard_path(flashcard)) %>
+    <div class="flashcard__answer" data-controller="toggle">
+        <span data-action="click->toggle#toggle" class="btn btn--secondary">Reveal</span>
+        <p data-toggle-target="answer" hidden='true'><%= flashcard.answer %></p>
+    </div>
+<% end %>

@@ -11,7 +11,7 @@ class FlashcardsController < ApplicationController
         min = Flashcard.minimum(:id)
         max = Flashcard.maximum(:id)
         if min.nil? || max.nil?
-            redirect_to flashcards_path, alert: 'No flashcards to quiz'
+            redirect_to root_path, alert: 'No flashcards to quiz'
         else
             id = rand(min..max)
             @flashcard = Flashcard.where('id >= ?', id).limit(1).first
@@ -27,7 +27,7 @@ class FlashcardsController < ApplicationController
         @flashcard = Flashcard.new(flashcard_params)
 
         if @flashcard.save
-            redirect_to flashcards_path, notice: 'Flashcard created successfully'
+            redirect_to root_path, notice: 'Flashcard created successfully'
         else
             render :new, alert: "Flashcard not created: #{flashcard.errors.full_messages.to_sentence}"
         end
@@ -45,9 +45,9 @@ class FlashcardsController < ApplicationController
     
     def destroy
         if @flashcard.destroy
-            redirect_to flashcards_path, notice: 'Flashcard deleted successfully'
+            redirect_to root_path, notice: 'Flashcard deleted successfully'
         else
-            redirect_to flashcards_path, alert: "Flashcard not deleted: #{flashcard.errors.full_messages.to_sentence}"
+            redirect_to root_path, alert: "Flashcard not deleted: #{flashcard.errors.full_messages.to_sentence}"
         end
     end
 

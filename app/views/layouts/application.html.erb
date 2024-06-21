@@ -17,7 +17,7 @@ i<!DOCTYPE html>
         <h1>Flashcards</h1>
         <%= link_to 'Quiz me!', random_flashcards_path, class: "btn btn--primary"  %>
         <% if @flashcard %>
-          <%= link_to sanitize("&larr; Back to flashcards"), flashcards_path %>
+          <%= link_to sanitize("&larr; Back to flashcards"), root_path %>
         <% else %>
           <%= link_to "New flashcard", new_flashcard_path, class: "btn btn--primary" %>
         <% end %>
