@@ -3,14 +3,14 @@ require 'rails_helper'
 RSpec.describe 'Flashcards', type: :feature do
     describe 'create' do
         it 'creates a new flashcard' do
-            visit flashcards_path
+            visit root_path
             click_on 'New flashcard'
 
             fill_in 'Question', with: 'What is the capital of France?'
             fill_in 'Answer', with: 'Paris'
             click_on 'Submit'
             
-            expect(current_path).to eq(flashcards_path)
+            expect(current_path).to eq(root_path)
             expect(page).to have_content('Flashcard created successfully')
             expect(page).to have_content('What is the capital of France?')
 
@@ -23,7 +23,7 @@ RSpec.describe 'Flashcards', type: :feature do
             Flashcard.create!(question: 'What is the capital of France?', answer: 'Paris')
             Flashcard.create!(question: 'What is the capital of Germany?', answer: 'Berlin')
             Flashcard.create!(question: 'What is the capital of Italy?', answer: 'Rome')
-            visit flashcards_path
+            visit root_path
 
             expect(page).to have_content('What is the capital of France?')
             expect(page).to have_content('What is the capital of Germany?')
@@ -37,19 +37,19 @@ RSpec.describe 'Flashcards', type: :feature do
             visit flashcard_path(flashcard)
 
             expect(page).to have_content('What is the capital of France?')
-            expect(page).to have_link('Back to flashcards', href: flashcards_path)
+            expect(page).to have_link('Back to flashcards', href: root_path)
         end
-        it 'displays the answer when the button is clicked' do
+    end
+    describe 'reveal', js: true, driver: :selenium_chrome_headless do
+        it 'displays the answer when clicked' do
             flashcard = Flashcard.create!(question: 'What is the capital of France?', answer: 'Paris')
             visit flashcard_path(flashcard)
 
             expect(page).to have_content('What is the capital of France?')
             expect(page).to_not have_content('Paris')
-            click_on 'Reveal'
+            find('#reveal-btn').click
 
-            # this might be a perfect task for stimulus
-            expect(page).to have_content('Paris')            
-            # there will be a button to say whether the user got the answer right or wrong
+            expect(page).to have_content('Paris')           
         end
     end
 
@@ -58,14 +58,14 @@ RSpec.describe 'Flashcards', type: :feature do
             Flashcard.create!(question: 'What is the capital of France?', answer: 'Paris')
             Flashcard.create!(question: 'What is the capital of Germany?', answer: 'Berlin')
             Flashcard.create!(question: 'What is the capital of Italy?', answer: 'Rome')
-            visit flashcards_path
+            visit root_path
             click_on 'Quiz me!'
             expect(page).to have_content('What is the capital of')
             click_on 'Quiz me!'
             expect(page).to have_content('What is the capital of')
         end
         it 'handles no flashcards' do
-            visit flashcards_path
+            visit root_path
             click_on 'Quiz me!'
             expect(page).to have_content('No flashcards to quiz')
         end
@@ -99,7 +99,7 @@ RSpec.describe 'Flashcards', type: :feature do
             visit flashcard_path(flashcard)
             click_on 'Delete'
 
-            expect(current_path).to eq(flashcards_path)
+            expect(current_path).to eq(root_path)
             expect(page).to have_content('Flashcard deleted successfully')
             expect(page).not_to have_content('What is the capital of France?')
         end
