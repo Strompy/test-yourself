@@ -13,8 +13,6 @@ RSpec.describe 'Flashcards', type: :feature do
             expect(current_path).to eq(root_path)
             expect(page).to have_content('Flashcard created successfully')
             expect(page).to have_content('What is the capital of France?')
-
-
         end
     end
 
@@ -39,19 +37,21 @@ RSpec.describe 'Flashcards', type: :feature do
             expect(page).to have_content('What is the capital of France?')
             expect(page).to have_link('Back to flashcards', href: root_path)
         end
-    end
-    describe 'reveal', js: true, driver: :selenium_chrome_headless do
-        it 'displays the answer when clicked' do
-            flashcard = Flashcard.create!(question: 'What is the capital of France?', answer: 'Paris')
-            visit flashcard_path(flashcard)
 
-            expect(page).to have_content('What is the capital of France?')
-            expect(page).to_not have_content('Paris')
-            find('#reveal-btn').click
+        describe 'reveal', js: true, driver: :selenium_chrome_headless do
+            it 'displays the answer when clicked' do
+                flashcard = Flashcard.create!(question: 'What is the capital of France?', answer: 'Paris')
+                visit flashcard_path(flashcard)
 
-            expect(page).to have_content('Paris')           
+                expect(page).to have_content('What is the capital of France?')
+                expect(page).to_not have_content('Paris')
+                
+                find('#reveal-btn').click
+                expect(page).to have_content('Paris')           
+            end
         end
     end
+
 
     describe 'random' do
         it 'grabs a random flash card and redirects to show' do
@@ -74,10 +74,12 @@ RSpec.describe 'Flashcards', type: :feature do
             flashcard.destroy
             visit random_flashcards_path
             expect(page).to have_content('No flashcards to quiz')
-            # maybe create a new card and check it always gets that card?
+            
+            flashcard = Flashcard.create!(question: 'What is the capital of France?', answer: 'Paris')
+            visit random_flashcards_path
+            expect(page).to have_content('What is the capital of France?')
         end
     end
-
 
     describe 'update' do
         it 'updates a flash card' do
