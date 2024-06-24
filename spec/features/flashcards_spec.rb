@@ -75,6 +75,7 @@ RSpec.describe 'Flashcards', type: :feature do
             flashcard.destroy
             visit random_flashcards_path
             expect(page).to have_content('No flashcards to quiz')
+            expect(current_path).to eq(root_path)
 
             allow_any_instance_of(Object).to receive(:rand).and_return(id)
             new_flashcard = Flashcard.create!(question: 'What is the capital of Italy?', answer: 'Rome')

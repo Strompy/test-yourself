@@ -8,15 +8,11 @@ class FlashcardsController < ApplicationController
     def show; end
 
     def random
-        min = Flashcard.minimum(:id)
-        max = Flashcard.maximum(:id)
-        if min.nil? || max.nil?
-            redirect_to root_path, alert: 'No flashcards to quiz'
-        else
-            id = rand(min..max)
-            @flashcard = Flashcard.where('id >= ?', id).limit(1).first
-            redirect_to flashcard_path(@flashcard)
-        end
+        @flashcard = Flashcard.find_random
+
+        redirect_to flashcard_path(@flashcard)
+    rescue ActiveRecord::RecordNotFound
+        redirect_to root_path, alert: 'No flashcards to quiz'
     end
     
     def new
