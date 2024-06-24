@@ -71,13 +71,15 @@ RSpec.describe 'Flashcards', type: :feature do
         end
         it 'handles deleted id' do
             flashcard = Flashcard.create!(question: 'What is the capital of France?', answer: 'Paris')
+            id = flashcard.id
             flashcard.destroy
             visit random_flashcards_path
             expect(page).to have_content('No flashcards to quiz')
-            
-            flashcard = Flashcard.create!(question: 'What is the capital of France?', answer: 'Paris')
+
+            allow_any_instance_of(Object).to receive(:rand).and_return(id)
+            new_flashcard = Flashcard.create!(question: 'What is the capital of Italy?', answer: 'Rome')
             visit random_flashcards_path
-            expect(page).to have_content('What is the capital of France?')
+            expect(page).to have_content('What is the capital of Italy?')
         end
     end
 
