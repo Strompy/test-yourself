@@ -1,5 +1,5 @@
 class FlashcardsController < ApplicationController
-    before_action :set_flashcard, only: [:show, :edit, :update, :destroy]
+    before_action :set_flashcard, only: [:show, :search, :edit, :update, :destroy]
 
     def index
         @flashcards = Flashcard.all
@@ -13,6 +13,12 @@ class FlashcardsController < ApplicationController
         redirect_to flashcard_path(@flashcard)
     rescue ActiveRecord::RecordNotFound
         redirect_to root_path, alert: 'No flashcards to quiz'
+    end
+
+    def search
+        correct = @flashcard.answer.downcase == params[:guess].downcase
+        message = correct ? 'Correct!' : 'Incorrect!'
+        redirect_to flashcard_path(@flashcard), notice: message
     end
     
     def new

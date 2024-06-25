@@ -7,6 +7,12 @@
 </div>
 
 <% if current_page?(flashcard_path(flashcard)) %>
+    <%= form_tag("/flashcards/#{flashcard.id}/search", method: :get) do %>
+        <%= label_tag :guess %>
+        <%= text_field_tag :guess %>
+        <%= submit_tag('Submit', class: "btn btn--secondary" ) %>
+    <% end %>
+
     <div class='container' data-controller="toggle">
         <div class='flashcard__btn'>
             <span data-action="click->toggle#toggle" class="btn btn--secondary" id='reveal-btn'>Reveal</span>

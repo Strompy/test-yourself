@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   root "flashcards#index"
   resources :flashcards do
     get :random, on: :collection
+    get :search, on: :member
   end
   resource :search, only: :show
 end

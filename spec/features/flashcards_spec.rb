@@ -38,6 +38,16 @@ RSpec.describe 'Flashcards', type: :feature do
             expect(page).to have_link('Back to flashcards', href: root_path)
         end
 
+        it 'user can submit answer' do
+            flashcard = Flashcard.create!(question: 'What is the capital of France?', answer: 'Paris')
+            visit flashcard_path(flashcard)
+
+            fill_in 'Guess', with: 'Paris'
+            click_on 'Submit'
+
+            expect(page).to have_content('Correct!')
+        end
+
         describe 'reveal', js: true, driver: :selenium_chrome_headless do
             it 'displays the answer when clicked' do
                 flashcard = Flashcard.create!(question: 'What is the capital of France?', answer: 'Paris')
